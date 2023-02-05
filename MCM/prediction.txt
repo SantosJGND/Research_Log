@@ -1,0 +1,6 @@
+Project sampling impact on mutation rate shift ascertainment will not go ahead.
+
+Probable reason:
+	New Analyses necessary not possible - loss of computing platform access.
+		solution: access to new comp. platform by August.
+	

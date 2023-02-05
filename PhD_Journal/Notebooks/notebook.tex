@@ -1,0 +1,1003 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{1. Generating\_haplotypes}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{generating-haplotypes-for-simulated-populations.}{%
+\section{Generating haplotypes for simulated
+populations.}\label{generating-haplotypes-for-simulated-populations.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{import} \PY{n+nn}{scipy}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k}{import} \PY{n}{PCA}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{invgamma}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{beta}
+        
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        
+        \PY{k+kn}{import} \PY{n+nn}{plotly}
+        \PY{k+kn}{import} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{plotly} \PY{k}{as} \PY{n+nn}{py}
+        \PY{k+kn}{import} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{graph\PYZus{}objs} \PY{k}{as} \PY{n+nn}{go}
+        \PY{k+kn}{from} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{offline} \PY{k}{import} \PY{n}{download\PYZus{}plotlyjs}\PY{p}{,} \PY{n}{init\PYZus{}notebook\PYZus{}mode}\PY{p}{,} \PY{n}{plot}\PY{p}{,} \PY{n}{iplot}
+        \PY{k+kn}{from} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{graph\PYZus{}objs} \PY{k}{import} \PY{o}{*}
+        
+        \PY{k+kn}{import} \PY{n+nn}{Lab\PYZus{}modules}\PY{n+nn}{.}\PY{n+nn}{Modules\PYZus{}tools}
+        
+        \PY{n}{init\PYZus{}notebook\PYZus{}mode}\PY{p}{(}\PY{n}{connected}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    This is a very rough approach at generating haplotypes for two or more
+different populations.
+
+For each population, alternative allele frequencies will be drawn
+randomly from the chosen distribution.
+
+Each individual will then have his haplotype drawn using the allele
+frequency vector pertaining to his population.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} the distribution i chose here was the beta distribution.}
+        \PY{c+c1}{\PYZsh{} doc: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html\PYZsh{}scipy.stats.beta}
+        
+        \PY{c+c1}{\PYZsh{} This is because with the right parameters a and b, the probability density produced }
+        \PY{c+c1}{\PYZsh{} resembles that often seen in allele frequency densities.}
+        \PY{c+c1}{\PYZsh{} let\PYZsq{}s see what that looks like:}
+        
+        \PY{n}{a}\PY{p}{,} \PY{n}{b} \PY{o}{=} \PY{l+m+mf}{1.8}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{2}
+        \PY{n}{r}\PY{o}{=} \PY{n}{beta}\PY{o}{.}\PY{n}{rvs}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}
+        \PY{n}{r}\PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{x} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{r}\PY{p}{]} 
+        
+        \PY{n}{fig}\PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Histogram}\PY{p}{(}
+            \PY{n}{x}\PY{o}{=}\PY{n}{r}\PY{p}{,}
+            \PY{n}{histnorm}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{control}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{n}{opacity}\PY{o}{=}\PY{l+m+mf}{0.75}
+        \PY{p}{)}
+        
+        \PY{n}{layout} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Layout}\PY{p}{(}
+            \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{frequency distribution. a= }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{; b= }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{,}
+            \PY{n}{xaxis}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+                \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Value}\PY{l+s+s1}{\PYZsq{}}
+            \PY{p}{)}\PY{p}{,}
+            \PY{n}{yaxis}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+                \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}
+            \PY{p}{)}\PY{p}{,}
+            \PY{n}{bargap}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,}
+            \PY{n}{bargroupgap}\PY{o}{=}\PY{l+m+mf}{0.1}
+        \PY{p}{)}
+        \PY{n}{fig}\PY{o}{=} \PY{p}{[}\PY{n}{fig}\PY{p}{]}
+        
+        \PY{n}{fig} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{fig}\PY{p}{,} \PY{n}{layout}\PY{o}{=}\PY{n}{layout}\PY{p}{)}
+        \PY{n}{py}\PY{o}{.}\PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{filename}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{styled histogram}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        ValueError                                Traceback (most recent call last)
+
+        <ipython-input-5-9be22f34ed25> in <module>()
+         14     histnorm='count',
+         15     name='control',
+    ---> 16     opacity=0.75
+         17 )
+         18 
+    
+
+        c:\textbackslash{}users\textbackslash{}jgarcia\textbackslash{}appdata\textbackslash{}local\textbackslash{}programs\textbackslash{}python\textbackslash{}python36-32\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}plotly\textbackslash{}graph\_objs\textbackslash{}\_histogram.py in \_\_init\_\_(self, arg, autobinx, autobiny, cumulative, customdata, customdatasrc, error\_x, error\_y, histfunc, histnorm, hoverinfo, hoverinfosrc, hoverlabel, ids, idssrc, legendgroup, marker, name, nbinsx, nbinsy, opacity, orientation, selected, selectedpoints, showlegend, stream, text, textsrc, uid, unselected, visible, x, xaxis, xbins, xcalendar, xsrc, y, yaxis, ybins, ycalendar, ysrc, **kwargs)
+       1775         self['histfunc'] = histfunc if histfunc is not None else \_v
+       1776         \_v = arg.pop('histnorm', None)
+    -> 1777         self['histnorm'] = histnorm if histnorm is not None else \_v
+       1778         \_v = arg.pop('hoverinfo', None)
+       1779         self['hoverinfo'] = hoverinfo if hoverinfo is not None else \_v
+    
+
+        c:\textbackslash{}users\textbackslash{}jgarcia\textbackslash{}appdata\textbackslash{}local\textbackslash{}programs\textbackslash{}python\textbackslash{}python36-32\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}plotly\textbackslash{}basedatatypes.py in \_\_setitem\_\_(self, prop, value)
+       2808             \# \#\#\# Handle simple property \#\#\#
+       2809             else:
+    -> 2810                 self.\_set\_prop(prop, value)
+       2811 
+       2812         \# Handle non-scalar case
+    
+
+        c:\textbackslash{}users\textbackslash{}jgarcia\textbackslash{}appdata\textbackslash{}local\textbackslash{}programs\textbackslash{}python\textbackslash{}python36-32\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}plotly\textbackslash{}basedatatypes.py in \_set\_prop(self, prop, val)
+       3044                 return
+       3045             else:
+    -> 3046                 raise err
+       3047 
+       3048         \# val is None
+    
+
+        c:\textbackslash{}users\textbackslash{}jgarcia\textbackslash{}appdata\textbackslash{}local\textbackslash{}programs\textbackslash{}python\textbackslash{}python36-32\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}plotly\textbackslash{}basedatatypes.py in \_set\_prop(self, prop, val)
+       3039         validator = self.\_validators.get(prop)
+       3040         try:
+    -> 3041             val = validator.validate\_coerce(val)
+       3042         except ValueError as err:
+       3043             if self.\_skip\_invalid:
+    
+
+        c:\textbackslash{}users\textbackslash{}jgarcia\textbackslash{}appdata\textbackslash{}local\textbackslash{}programs\textbackslash{}python\textbackslash{}python36-32\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}\_plotly\_utils\textbackslash{}basevalidators.py in validate\_coerce(self, v)
+        538             v = self.perform\_replacemenet(v)
+        539             if not self.in\_values(v):
+    --> 540                 self.raise\_invalid\_val(v)
+        541         return v
+        542 
+    
+
+        c:\textbackslash{}users\textbackslash{}jgarcia\textbackslash{}appdata\textbackslash{}local\textbackslash{}programs\textbackslash{}python\textbackslash{}python36-32\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}\_plotly\_utils\textbackslash{}basevalidators.py in raise\_invalid\_val(self, v, inds)
+        252             typ=type\_str(v),
+        253             v=repr(v),
+    --> 254             valid\_clr\_desc=self.description()))
+        255 
+        256     def raise\_invalid\_elements(self, invalid\_els):
+    
+
+        ValueError: 
+        Invalid value of type 'builtins.str' received for the 'histnorm' property of histogram
+            Received value: 'count'
+    
+        The 'histnorm' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['', 'percent', 'probability', 'density', 'probability
+                density']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} a= 1.8 and b= .1 seem appropriate, lets proceed to create our populations}
+        
+        \PY{c+c1}{\PYZsh{} We must first define the number of populations, the length of the haplotypes desired, and their respective population sizes:}
+        \PY{n}{N\PYZus{}pops}\PY{o}{=} \PY{l+m+mi}{3}
+        \PY{n}{L}\PY{o}{=} \PY{l+m+mi}{200}
+        \PY{n}{Sizes}\PY{o}{=} \PY{p}{[}\PY{l+m+mi}{250}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{]}
+        \PY{n}{labels}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{x} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N\PYZus{}pops}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{Sizes}\PY{p}{)}
+        
+        \PY{n}{data}\PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+        \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N\PYZus{}pops}\PY{p}{)}\PY{p}{:}
+            
+            \PY{n}{probs}\PY{o}{=} \PY{n}{beta}\PY{o}{.}\PY{n}{rvs}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{L}\PY{p}{)}
+            \PY{n}{probs}\PY{p}{[}\PY{p}{(}\PY{n}{probs} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{o}{=} \PY{l+m+mi}{1}
+            
+            \PY{n}{m}\PY{o}{=} \PY{n}{Sizes}\PY{p}{[}\PY{n}{k}\PY{p}{]}
+            \PY{n}{Haps}\PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{p}\PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{probs}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,}\PY{n}{probs}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{L}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{acc} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{]}
+            
+            \PY{n}{data}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{n}{Haps}\PY{p}{)}
+        
+        \PY{n}{data}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(650, 200)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{n\PYZus{}comp} \PY{o}{=} \PY{l+m+mi}{100}
+        
+        \PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{n}{n\PYZus{}comp}\PY{p}{,} \PY{n}{whiten}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}\PY{n}{svd\PYZus{}solver}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{randomized}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{features} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+        
+        \PY{n}{var\PYZus{}comps}\PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{; }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{: }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{round}\PY{p}{(}\PY{n}{var\PYZus{}comps}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}comp}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{features}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+PC1: 0.171; PC2: 0.074; PC3: 0.018; PC4: 0.017; PC5: 0.016; PC6: 0.015; PC7: 0.014; PC8: 0.014; PC9: 0.013; PC10: 0.013; PC11: 0.013; PC12: 0.013; PC13: 0.012; PC14: 0.012; PC15: 0.012; PC16: 0.011; PC17: 0.011; PC18: 0.011; PC19: 0.011; PC20: 0.01; PC21: 0.01; PC22: 0.01; PC23: 0.01; PC24: 0.01; PC25: 0.01; PC26: 0.009; PC27: 0.009; PC28: 0.009; PC29: 0.009; PC30: 0.009; PC31: 0.009; PC32: 0.009; PC33: 0.008; PC34: 0.008; PC35: 0.008; PC36: 0.008; PC37: 0.008; PC38: 0.008; PC39: 0.008; PC40: 0.007; PC41: 0.007; PC42: 0.007; PC43: 0.007; PC44: 0.007; PC45: 0.007; PC46: 0.007; PC47: 0.007; PC48: 0.007; PC49: 0.007; PC50: 0.006; PC51: 0.006; PC52: 0.006; PC53: 0.006; PC54: 0.006; PC55: 0.006; PC56: 0.006; PC57: 0.006; PC58: 0.006; PC59: 0.005; PC60: 0.005; PC61: 0.005; PC62: 0.005; PC63: 0.005; PC64: 0.005; PC65: 0.005; PC66: 0.005; PC67: 0.005; PC68: 0.005; PC69: 0.005; PC70: 0.004; PC71: 0.004; PC72: 0.004; PC73: 0.004; PC74: 0.004; PC75: 0.004; PC76: 0.004; PC77: 0.004; PC78: 0.004; PC79: 0.004; PC80: 0.004; PC81: 0.004; PC82: 0.004; PC83: 0.003; PC84: 0.003; PC85: 0.003; PC86: 0.003; PC87: 0.003; PC88: 0.003; PC89: 0.003; PC90: 0.003; PC91: 0.003; PC92: 0.003; PC93: 0.003; PC94: 0.003; PC95: 0.003; PC96: 0.003; PC97: 0.003; PC98: 0.003; PC99: 0.002; PC100: 0.002
+(650, 100)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} lets visualize the result now:}
+         \PY{n}{colors\PYZus{}pres}\PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yellow}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{fig\PYZus{}data}\PY{o}{=} \PY{p}{[}\PY{n}{go}\PY{o}{.}\PY{n}{Scatter}\PY{p}{(}
+                 \PY{n}{x}\PY{o}{=} \PY{n}{features}\PY{p}{[}\PY{p}{[}\PY{n}{x} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{Sizes}\PY{p}{)}\PY{p}{)} \PY{k}{if} \PY{n}{labels}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o}{==} \PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{y}\PY{o}{=} \PY{n}{features}\PY{p}{[}\PY{p}{[}\PY{n}{x} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{Sizes}\PY{p}{)}\PY{p}{)} \PY{k}{if} \PY{n}{labels}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o}{==} \PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{mode}\PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{markers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                 \PY{n}{marker}\PY{o}{=} \PY{p}{\PYZob{}}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{color}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{colors\PYZus{}pres}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{line}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{\PYZcb{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{8}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{symbol}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{circle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+               \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{opacity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{o}{.}\PY{l+m+mi}{8}
+               \PY{p}{\PYZcb{}}\PY{p}{,}
+               \PY{n}{name}\PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N\PYZus{}pops}\PY{p}{)}\PY{p}{]}
+         
+         
+         \PY{n}{layout} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Layout}\PY{p}{(}
+             \PY{n}{margin}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+                 \PY{n}{l}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                 \PY{n}{r}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                 \PY{n}{b}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                 \PY{n}{t}\PY{o}{=}\PY{l+m+mi}{0}
+             \PY{p}{)}\PY{p}{,}
+             \PY{n}{yaxis}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+                 \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC2: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{var\PYZus{}comps}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+             \PY{n}{xaxis}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+             \PY{n}{title}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC1: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{var\PYZus{}comps}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{p}{)}
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{fig\PYZus{}data}\PY{p}{,} \PY{n}{layout}\PY{o}{=}\PY{n}{layout}\PY{p}{)}
+         \PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    This looks very nice. Frequencies drawn at random from a predetermined
+beta distribution produce very different vectors, which translate into
+neatly separated populations.
+
+Here, the degree of differentiation between our populations will be
+proportional to the correlation between the vectors we created them
+with. However, by drawing at random from a single beta distribution, we
+really have no hand over the relative distances between these vectors.
+
+How can we simulate populations, or vectors, in a way that allows us to
+have at least some control over their relative differences?
+
+Population genetics models could provide us with an answer, by assuming
+mutation rates, growth rates, recombination and standard age gaps to
+coalesce our four populations and extract ancestral vectors and sizes at
+nodes of our choosing.
+
+\begin{itemize}
+\tightlist
+\item
+  If we don't need the information generated in that process however, a
+  more pragmatic approach is possible.
+\end{itemize}
+
+Since what we are looking to do is identify a degree of correlation
+between these vectors before we generate their associated haplotypes, it
+stands that a PCA should do the job.
+
+In the first part, we drew four vectors only for stable values of
+\emph{a} and \emph{b}, the beta parameters. Let's make those parameters
+vary, and draw 10 vectors at each change.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} Simulate frequency vectors. }
+         \PY{c+c1}{\PYZsh{} We must first define the number of populations, the length of the haplotypes desired, and their respective population sizes}
+         \PY{n}{L}\PY{o}{=} \PY{l+m+mi}{300}
+         
+         \PY{k+kn}{import} \PY{n+nn}{itertools} \PY{k}{as} \PY{n+nn}{it}
+         \PY{n}{n}\PY{o}{=} \PY{l+m+mi}{200}
+         
+         \PY{c+c1}{\PYZsh{} Vary a (beta distribution parameter).}
+         \PY{n}{a\PYZus{}range}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{a\PYZus{}set}\PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{a\PYZus{}range} \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} vary b.}
+         \PY{n}{b\PYZus{}range}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{o}{.}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{b\PYZus{}set}\PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{b\PYZus{}range} \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} length of haplotypes to extract.}
+         \PY{n}{L\PYZus{}set}\PY{o}{=} \PY{p}{[}\PY{n}{L}\PY{p}{]} \PY{o}{*} \PY{n}{n} \PY{o}{*} \PY{l+m+mi}{20}
+         
+         
+         \PY{n}{background\PYZus{}1}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{a\PYZus{}set}\PY{p}{,}\PY{n}{b\PYZus{}set}\PY{p}{,}\PY{n}{L\PYZus{}set}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         
+         \PY{n}{vector\PYZus{}lib}\PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{background\PYZus{}1}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{probs}\PY{o}{=} \PY{n}{beta}\PY{o}{.}\PY{n}{rvs}\PY{p}{(}\PY{n}{background\PYZus{}1}\PY{p}{[}\PY{n}{k}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{background\PYZus{}1}\PY{p}{[}\PY{n}{k}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n}{background\PYZus{}1}\PY{p}{[}\PY{n}{k}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{n}{probs}\PY{p}{[}\PY{p}{(}\PY{n}{probs} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{o}{=} \PY{l+m+mi}{1}
+             
+             
+             \PY{n}{vector\PYZus{}lib}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{probs}\PY{p}{)}
+         
+         \PY{n}{vector\PYZus{}lib}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{vector\PYZus{}lib}\PY{p}{)}
+\end{Verbatim}
+
+
+    And reduce their dimension through PCA.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{n\PYZus{}comp} \PY{o}{=} \PY{l+m+mi}{100}
+         
+         \PY{n}{pca\PYZus{}vectors} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{n}{n\PYZus{}comp}\PY{p}{,} \PY{n}{whiten}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}\PY{n}{svd\PYZus{}solver}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{randomized}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{features\PYZus{}vectors} \PY{o}{=} \PY{n}{pca\PYZus{}vectors}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{vector\PYZus{}lib}\PY{p}{)}
+         \PY{n}{var\PYZus{}comps}\PY{o}{=} \PY{n}{pca\PYZus{}vectors}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{; }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{: }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{round}\PY{p}{(}\PY{n}{pca\PYZus{}vectors}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}comp}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{features shape: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{features}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+PC1: 0.015; PC2: 0.005; PC3: 0.005; PC4: 0.005; PC5: 0.005; PC6: 0.005; PC7: 0.005; PC8: 0.005; PC9: 0.005; PC10: 0.005; PC11: 0.005; PC12: 0.005; PC13: 0.005; PC14: 0.005; PC15: 0.005; PC16: 0.005; PC17: 0.005; PC18: 0.005; PC19: 0.005; PC20: 0.005; PC21: 0.005; PC22: 0.005; PC23: 0.005; PC24: 0.005; PC25: 0.005; PC26: 0.005; PC27: 0.005; PC28: 0.005; PC29: 0.005; PC30: 0.005; PC31: 0.004; PC32: 0.004; PC33: 0.004; PC34: 0.004; PC35: 0.004; PC36: 0.004; PC37: 0.004; PC38: 0.004; PC39: 0.004; PC40: 0.004; PC41: 0.004; PC42: 0.004; PC43: 0.004; PC44: 0.004; PC45: 0.004; PC46: 0.004; PC47: 0.004; PC48: 0.004; PC49: 0.004; PC50: 0.004; PC51: 0.004; PC52: 0.004; PC53: 0.004; PC54: 0.004; PC55: 0.004; PC56: 0.004; PC57: 0.004; PC58: 0.004; PC59: 0.004; PC60: 0.004; PC61: 0.004; PC62: 0.004; PC63: 0.004; PC64: 0.004; PC65: 0.004; PC66: 0.004; PC67: 0.004; PC68: 0.004; PC69: 0.004; PC70: 0.004; PC71: 0.004; PC72: 0.004; PC73: 0.004; PC74: 0.004; PC75: 0.004; PC76: 0.004; PC77: 0.004; PC78: 0.004; PC79: 0.004; PC80: 0.004; PC81: 0.004; PC82: 0.004; PC83: 0.004; PC84: 0.004; PC85: 0.004; PC86: 0.004; PC87: 0.004; PC88: 0.004; PC89: 0.004; PC90: 0.004; PC91: 0.003; PC92: 0.003; PC93: 0.003; PC94: 0.003; PC95: 0.003; PC96: 0.003; PC97: 0.003; PC98: 0.003; PC99: 0.003; PC100: 0.003
+features shape: (650, 100)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{fig\PYZus{}data}\PY{o}{=} \PY{p}{[}\PY{n}{go}\PY{o}{.}\PY{n}{Scatter}\PY{p}{(}
+                 \PY{n}{x} \PY{o}{=} \PY{n}{features\PYZus{}vectors}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{y} \PY{o}{=} \PY{n}{features\PYZus{}vectors}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{mode}\PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{markers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                 \PY{n}{text}\PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{; b: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, L: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{; index = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{background\PYZus{}1}\PY{p}{[}\PY{n}{k}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{background\PYZus{}1}\PY{p}{[}\PY{n}{k}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{background\PYZus{}1}\PY{p}{[}\PY{n}{k}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{k}\PY{p}{)} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{background\PYZus{}1}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{marker}\PY{o}{=} \PY{p}{\PYZob{}}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{line}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{\PYZcb{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{4}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{symbol}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{circle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+               \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{opacity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{o}{.}\PY{l+m+mi}{8}
+               \PY{p}{\PYZcb{}}
+             \PY{p}{)}\PY{p}{]}
+         
+         
+         \PY{n}{layout} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Layout}\PY{p}{(}
+             \PY{n}{margin}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+                 \PY{n}{l}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                 \PY{n}{r}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                 \PY{n}{b}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                 \PY{n}{t}\PY{o}{=}\PY{l+m+mi}{0}
+             \PY{p}{)}\PY{p}{,}
+             \PY{n}{yaxis}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+                 \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC2: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{var\PYZus{}comps}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+             \PY{n}{xaxis}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+             \PY{n}{title}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC1: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{var\PYZus{}comps}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{p}{)}
+         
+         
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{fig\PYZus{}data}\PY{p}{,} \PY{n}{layout}\PY{o}{=}\PY{n}{layout}\PY{p}{)}
+         \PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    Principal component analysis of the vectors produced. Their index along
+the vector\_lib array can be examined by hovering above the points,
+
+Their distances in this space are our indicators of correlation among
+these vectors. Chose them according to the scenarios intended and
+generate the haplotypes. Below i chose four, and plotted the result of a
+PCA on the resulting data set. I won't comment on them, the process is
+random, and so will be the relationships betweem the populations.
+
+We'll also calculate the pairwise Fsts between these populations based
+on their frequency vectors. These can then be compared to their
+distances in feature space.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{Pops}\PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{75}\PY{p}{]}
+         \PY{n}{N\PYZus{}pops}\PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{Pops}\PY{p}{)}
+         \PY{n}{L}\PY{o}{=} \PY{l+m+mi}{200}
+         \PY{n}{Sizes}\PY{o}{=} \PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{]}
+         \PY{n}{labels}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{repeat}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{x} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N\PYZus{}pops}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{Sizes}\PY{p}{)}
+         
+         \PY{n}{data}\PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N\PYZus{}pops}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{probs}\PY{o}{=} \PY{n}{vector\PYZus{}lib}\PY{p}{[}\PY{n}{Pops}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+             
+             \PY{n}{m}\PY{o}{=} \PY{n}{Sizes}\PY{p}{[}\PY{n}{k}\PY{p}{]}
+             \PY{n}{Haps}\PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{p}\PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{probs}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,}\PY{n}{probs}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{L}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{acc} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{]}
+             
+             \PY{n}{data}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{n}{Haps}\PY{p}{)}
+         
+         \PY{n}{data}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Calculate pairwise Fst based on frequency vectors selected.}
+         \PY{k+kn}{from} \PY{n+nn}{Lab\PYZus{}modules}\PY{n+nn}{.}\PY{n+nn}{StructE\PYZus{}tools} \PY{k}{import} \PY{n}{return\PYZus{}fsts}\PY{p}{,} \PY{n}{return\PYZus{}fsts2}
+         \PY{n}{freqs\PYZus{}selected}\PY{o}{=} \PY{n}{vector\PYZus{}lib}\PY{p}{[}\PY{n}{Pops}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+         \PY{n}{Pairwise}\PY{o}{=} \PY{n}{return\PYZus{}fsts2}\PY{p}{(}\PY{n}{freqs\PYZus{}selected}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{Pairwise}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+     pops       fst
+0  (0, 1)  0.111132
+1  (0, 2)  0.108500
+2  (0, 3)  0.097549
+3  (0, 4)  0.111204
+4  (1, 2)  0.111122
+5  (1, 3)  0.104037
+6  (1, 4)  0.122105
+7  (2, 3)  0.108272
+8  (2, 4)  0.098064
+9  (3, 4)  0.113536
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}jgarcia\textbackslash{}Desktop\textbackslash{}Jupyter\_stuff\textbackslash{}Genetic-data-analysis\textbackslash{}Notebooks\textbackslash{}Lab\_modules\textbackslash{}StructE\_tools.py:398: RuntimeWarning:
+
+invalid value encountered in double\_scalars
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{n\PYZus{}comp} \PY{o}{=} \PY{l+m+mi}{4}
+         
+         \PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{n}{n\PYZus{}comp}\PY{p}{,} \PY{n}{whiten}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}\PY{n}{svd\PYZus{}solver}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{randomized}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{features}\PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+         
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{; }\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PC}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{: }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{round}\PY{p}{(}\PY{n}{pca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n\PYZus{}comp}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{features}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+PC1: 0.139; PC2: 0.112; PC3: 0.099; PC4: 0.085
+(250, 4)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} lets visualize the result now:}
+         
+         \PY{n}{fig\PYZus{}data}\PY{o}{=} \PY{p}{[}\PY{n}{go}\PY{o}{.}\PY{n}{Scatter3d}\PY{p}{(}
+                 \PY{n}{x} \PY{o}{=} \PY{n}{features}\PY{p}{[}\PY{p}{[}\PY{n}{x} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{Sizes}\PY{p}{)}\PY{p}{)} \PY{k}{if} \PY{n}{labels}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o}{==} \PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{y} \PY{o}{=} \PY{n}{features}\PY{p}{[}\PY{p}{[}\PY{n}{x} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{Sizes}\PY{p}{)}\PY{p}{)} \PY{k}{if} \PY{n}{labels}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o}{==} \PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{z} \PY{o}{=} \PY{n}{features}\PY{p}{[}\PY{p}{[}\PY{n}{x} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{Sizes}\PY{p}{)}\PY{p}{)} \PY{k}{if} \PY{n}{labels}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o}{==} \PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{mode}\PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{markers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                 \PY{n}{marker}\PY{o}{=} \PY{p}{\PYZob{}}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{line}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{\PYZcb{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{4}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{symbol}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{circle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+               \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{opacity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{o}{.}\PY{l+m+mi}{8}
+               \PY{p}{\PYZcb{}}\PY{p}{,}
+               \PY{n}{name}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pop: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{Pops}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+             \PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N\PYZus{}pops}\PY{p}{)}\PY{p}{]}
+         
+         
+         \PY{n}{layout} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Layout}\PY{p}{(}
+             \PY{n}{margin}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+                 \PY{n}{l}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                 \PY{n}{r}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                 \PY{n}{b}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                 \PY{n}{t}\PY{o}{=}\PY{l+m+mi}{0}
+             \PY{p}{)}
+         \PY{p}{)}
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{fig\PYZus{}data}\PY{p}{,} \PY{n}{layout}\PY{o}{=}\PY{n}{layout}\PY{p}{)}
+         \PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \hypertarget{expanding-range-of-genetic-distances.}{%
+\subsection{Expanding range of genetic
+distances.}\label{expanding-range-of-genetic-distances.}}
+
+So far we saw how to generate proxy populations along and explored a
+manner to select them based on correlation.
+
+One questioon remains: how differentiated are the pops we generated? If
+we select randomly from the vector\_lib data set, what differentiation
+can we expect between the selected populations?
+
+To answer this question, we will sample randomly from the vector\_lib
+data set, calculate pairwise Fsts, and look at their distribution.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} distribution of genetic distances generated on first layer:}
+         
+         \PY{n}{N\PYZus{}sample}\PY{o}{=} \PY{l+m+mi}{100}
+         
+         \PY{n}{Pops\PYZus{}test}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{vector\PYZus{}lib}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{N\PYZus{}sample}\PY{p}{)}
+         
+         \PY{n}{Fsts\PYZus{}test}\PY{p}{,} \PY{n}{Total\PYZus{}fst}\PY{o}{=} \PY{n}{return\PYZus{}fsts}\PY{p}{(}\PY{n}{vector\PYZus{}lib}\PY{p}{,}\PY{n}{Pops\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}jgarcia\textbackslash{}Desktop\textbackslash{}Jupyter\_stuff\textbackslash{}Genetic-data-analysis\textbackslash{}Notebooks\textbackslash{}Lab\_modules\textbackslash{}StructE\_tools.py:377: RuntimeWarning:
+
+invalid value encountered in double\_scalars
+
+C:\textbackslash{}Users\textbackslash{}jgarcia\textbackslash{}Desktop\textbackslash{}Jupyter\_stuff\textbackslash{}Genetic-data-analysis\textbackslash{}Notebooks\textbackslash{}Lab\_modules\textbackslash{}StructE\_tools.py:377: RuntimeWarning:
+
+divide by zero encountered in double\_scalars
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Distribution of feature space distances between control populations for even and biased scenarios}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{KernelDensity}
+         \PY{n}{Fsts\PYZus{}den}\PY{o}{=} \PY{n}{Fsts\PYZus{}test}\PY{o}{.}\PY{n}{fst}
+         
+         \PY{n}{Fsts\PYZus{}den}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nan\PYZus{}to\PYZus{}num}\PY{p}{(}\PY{n}{Fsts\PYZus{}den}\PY{p}{)}
+         
+         \PY{n}{X\PYZus{}plot} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+         
+         \PY{n}{kde} \PY{o}{=} \PY{n}{KernelDensity}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gaussian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{bandwidth}\PY{o}{=}\PY{l+m+mf}{0.005}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{Fsts\PYZus{}den}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{log\PYZus{}dens} \PY{o}{=} \PY{n}{kde}\PY{o}{.}\PY{n}{score\PYZus{}samples}\PY{p}{(}\PY{n}{X\PYZus{}plot}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{fig\PYZus{}roost\PYZus{}dens}\PY{o}{=} \PY{p}{[}\PY{n}{go}\PY{o}{.}\PY{n}{Scatter}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{X\PYZus{}plot}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{log\PYZus{}dens}\PY{p}{)}\PY{p}{,} 
+                                     \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lines}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fill}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tozeroy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{name}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Biased senarios}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                     \PY{n}{line}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}}
+         
+         \PY{n}{layout}\PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Layout}\PY{p}{(}
+             \PY{n}{title}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distribution of genetic distances generated in layer I.}\PY{l+s+s1}{\PYZsq{}}
+         \PY{p}{)}
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{fig\PYZus{}roost\PYZus{}dens}\PY{p}{,} \PY{n}{layout}\PY{o}{=} \PY{n}{layout}\PY{p}{)}
+         \PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    Distribution of pairwise Fsts between frequency vectors randomly
+selected from the vector\_lib data set.
+
+The result is not optimal. We learn that our approach generates
+populations along a limited range of genetic distances, roughly 0.09 to
+0.15.
+
+We will try to expand that range, resorting to the PCA transformation of
+these vectors.
+
+We will extract the inverse transformation of new coordinates, drawn at
+small dinstance intervals between one another.
+
+    \hypertarget{mrca---most-recent-common-ancestor.}{%
+\subsubsection{MRCA - Most Recent Common
+Ancestor.}\label{mrca---most-recent-common-ancestor.}}
+
+The following block serves to tie all the populations in the vector data
+set together.
+
+The random generation of frequency vectors creates vectors distinct
+along, assymptotically, all possible directions.
+
+Here, we limit the number of possible directions, by creating a data set
+made entirely of vectors generated as described for the manipulation of
+genetic distances, i.e.~from equally distant coordinates between two
+initial projections. We continue to rely on pairs of initial
+projections. However, here, only one projection is made to vary, while
+the other is chosen beforehand and remains the same.
+
+The result is the starshaped distribution observed in the next graph.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{Iter}\PY{o}{=} \PY{l+m+mi}{50}
+         \PY{n}{target}\PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{stairs}\PY{o}{=} \PY{l+m+mi}{4}
+         
+         \PY{n}{MRCA}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{vector\PYZus{}lib}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{calypso}\PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{feat}\PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{n}{background}\PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{inter} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{stairs}\PY{p}{)}\PY{p}{:}
+             \PY{n}{Pair}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{vector\PYZus{}lib}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{replace}\PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+             \PY{n}{Pair}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=} \PY{n}{MRCA}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{Pair}\PY{p}{)}
+             
+             \PY{n}{coords}\PY{o}{=} \PY{n}{features\PYZus{}vectors}\PY{p}{[}\PY{n}{Pair}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+             
+             \PY{n}{vector2}\PY{o}{=} \PY{n}{coords}\PY{p}{[}\PY{n}{target}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{coords}\PY{p}{[}\PY{n}{target}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}
+             
+             \PY{k}{for} \PY{n}{angle} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{n}{Iter}\PY{p}{)}\PY{p}{:}
+                         
+                 \PY{n}{new\PYZus{}guy} \PY{o}{=} \PY{n}{coords}\PY{p}{[}\PY{n}{target}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]} \PY{o}{+} \PY{p}{[}\PY{n}{angle} \PY{o}{/} \PY{l+m+mi}{10} \PY{o}{*} \PY{n}{x} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{vector2}\PY{p}{]}
+                 
+                 \PY{n}{feat}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{new\PYZus{}guy}\PY{p}{)}
+                 
+                 \PY{n}{new\PYZus{}guy}\PY{o}{=} \PY{n}{pca\PYZus{}vectors}\PY{o}{.}\PY{n}{inverse\PYZus{}transform}\PY{p}{(}\PY{n}{new\PYZus{}guy}\PY{p}{)}
+                 
+                 
+                 \PY{n}{new\PYZus{}guy}\PY{p}{[}\PY{n}{new\PYZus{}guy} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{n}{new\PYZus{}guy}\PY{p}{[}\PY{n}{new\PYZus{}guy} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=} \PY{l+m+mi}{1}
+                 
+                 \PY{n}{background}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{inter}\PY{p}{,} \PY{n}{angle}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{calypso}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{new\PYZus{}guy}\PY{p}{)}
+         
+         \PY{n}{features}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{feat}\PY{p}{)}
+         \PY{n}{vector\PYZus{}lib\PYZus{}2}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{calypso}\PY{p}{)}
+         \PY{n}{background}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{background}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 970 1891]
+[3681 1891]
+[ 914 1891]
+[ 519 1891]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Plot vector PCA}
+         \PY{n}{fig\PYZus{}data}\PY{o}{=} \PY{p}{[}\PY{n}{go}\PY{o}{.}\PY{n}{Scatter3d}\PY{p}{(}
+                 \PY{n}{x} \PY{o}{=} \PY{n}{features}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{y} \PY{o}{=} \PY{n}{features}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{z} \PY{o}{=} \PY{n}{features}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{mode}\PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{markers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                 \PY{n}{text}\PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{; b: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{; index = }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{background}\PY{p}{[}\PY{n}{k}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{background}\PY{p}{[}\PY{n}{k}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{k}\PY{p}{)} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{background}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{marker}\PY{o}{=} \PY{p}{\PYZob{}}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{line}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{\PYZcb{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{symbol}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{circle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+               \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{opacity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{o}{.}\PY{l+m+mi}{6}
+               \PY{p}{\PYZcb{}}
+             \PY{p}{)}\PY{p}{]}
+         
+         
+         \PY{n}{layout} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Layout}\PY{p}{(}
+             \PY{n}{margin}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+                 \PY{n}{l}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                 \PY{n}{r}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                 \PY{n}{b}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+                 \PY{n}{t}\PY{o}{=}\PY{l+m+mi}{0}
+             \PY{p}{)}
+         \PY{p}{)}
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{fig\PYZus{}data}\PY{p}{)}
+         \PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{N\PYZus{}sample}\PY{o}{=} \PY{l+m+mi}{100}
+         
+         \PY{n}{Pops\PYZus{}test}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{vector\PYZus{}lib\PYZus{}2}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{N\PYZus{}sample}\PY{p}{)}
+         
+         \PY{n}{freqs\PYZus{}selected}\PY{o}{=} \PY{n}{vector\PYZus{}lib\PYZus{}2}\PY{p}{[}\PY{n}{Pops\PYZus{}test}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+         \PY{n}{Pairwise}\PY{o}{=} \PY{n}{return\PYZus{}fsts2}\PY{p}{(}\PY{n}{freqs\PYZus{}selected}\PY{p}{)}
+         
+         \PY{n}{Fsts\PYZus{}test\PYZus{}2} \PY{o}{=} \PY{n}{Pairwise}\PY{o}{.}\PY{n}{fst}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}jgarcia\textbackslash{}Desktop\textbackslash{}Jupyter\_stuff\textbackslash{}Genetic-data-analysis\textbackslash{}Notebooks\textbackslash{}Lab\_modules\textbackslash{}StructE\_tools.py:398: RuntimeWarning:
+
+invalid value encountered in double\_scalars
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Distribution of feature space distances between control populations for even and biased scenarios}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{KernelDensity}
+         
+         
+         \PY{n}{Fsts\PYZus{}den}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nan\PYZus{}to\PYZus{}num}\PY{p}{(}\PY{n}{Fsts\PYZus{}test\PYZus{}2}\PY{p}{)}
+         
+         \PY{n}{X\PYZus{}plot} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+         
+         \PY{n}{kde} \PY{o}{=} \PY{n}{KernelDensity}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gaussian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{bandwidth}\PY{o}{=}\PY{l+m+mf}{0.005}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{Fsts\PYZus{}den}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{log\PYZus{}dens} \PY{o}{=} \PY{n}{kde}\PY{o}{.}\PY{n}{score\PYZus{}samples}\PY{p}{(}\PY{n}{X\PYZus{}plot}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{fig\PYZus{}roost\PYZus{}dens}\PY{o}{=} \PY{p}{[}\PY{n}{go}\PY{o}{.}\PY{n}{Scatter}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{X\PYZus{}plot}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{log\PYZus{}dens}\PY{p}{)}\PY{p}{,} 
+                                     \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lines}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fill}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tozeroy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{name}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Biased senarios}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                     \PY{n}{line}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}}
+         
+         \PY{n}{layout}\PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Layout}\PY{p}{(}
+             \PY{n}{title}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distribution of genetic distances generated in layer II.}\PY{l+s+s1}{\PYZsq{}}
+         \PY{p}{)}
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{fig\PYZus{}roost\PYZus{}dens}\PY{p}{,} \PY{n}{layout}\PY{o}{=} \PY{n}{layout}\PY{p}{)}
+         \PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    Distribution of pairwise Fsts between frequency vectors randomly
+selected from MRCA data set.
+
+It is definitely not pretty, but the range of genetic distances produced
+is succesfully expanded.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
